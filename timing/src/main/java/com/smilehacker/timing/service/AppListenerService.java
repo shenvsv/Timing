@@ -80,7 +80,7 @@ public class AppListenerService extends Service {
             protected Void doInBackground(Void... voids) {
                 String packageName = mAppListener.getForegroundPackage();
                 AppRecord.increaseData(packageName);
-                DailyRecord.addRecordByNow();
+                //DailyRecord.addRecordByNow();
                 return null;
             }
         }.execute();

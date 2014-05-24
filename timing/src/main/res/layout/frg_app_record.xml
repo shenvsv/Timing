@@ -22,13 +22,9 @@
         android:id="@+id/lv_app_record"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/graph_layer"
         android:scrollbarStyle="outsideOverlay"
-        android:padding="10dp"
         android:clipToPadding="false"
-        android:background="@color/light_gray_background"
-        android:dividerHeight="15dp"
-        android:divider="@android:color/transparent"
+        android:divider="@null"
         >
     </ListView>
 

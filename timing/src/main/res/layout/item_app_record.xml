@@ -2,6 +2,16 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:background="@color/holo_light_gray"
+    >
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="75dp"
     android:background="@drawable/btn_card"
@@ -32,8 +42,6 @@
             style="@android:style/Widget.Holo.ProgressBar.Horizontal"
             android:layout_alignParentBottom="true"
             android:max="100"
-            android:progress="100"
-            android:secondaryProgress="33"
             />
 
 
@@ -59,4 +67,5 @@
     </RelativeLayout>
 
 
+</RelativeLayout>
 </RelativeLayout>

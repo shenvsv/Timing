@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.smilehacker.timing.R;
@@ -23,6 +24,7 @@ public class AppRecordListAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private AsyncIconLoader mAsyncIconLoader;
+    private long mMax;
 
     public AppRecordListAdapter(Context context, List<AppInfo> appInfos) {
         mContext = context;
@@ -34,6 +36,7 @@ public class AppRecordListAdapter extends BaseAdapter {
     public void flush(List<AppInfo> appInfos) {
         mAppInfos.clear();
         mAppInfos.addAll(appInfos);
+            mMax = appInfos.size() > 0 ? mAppInfos.get(0).duration : 0;
         notifyDataSetChanged();
     }
 
@@ -61,6 +64,7 @@ public class AppRecordListAdapter extends BaseAdapter {
             holder.name = (TextView) view.findViewById(R.id.tv_name);
             holder.duration = (TextView) view.findViewById(R.id.tv_duration);
             holder.icon = (ImageView) view.findViewById(R.id.iv_icon);
+            holder.progressbar = (ProgressBar) view.findViewById(R.id.pb_time);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -69,6 +73,7 @@ public class AppRecordListAdapter extends BaseAdapter {
         AppInfo appInfo = mAppInfos.get(i);
         holder.name.setText(appInfo.appName);
         holder.duration.setText(appInfo.time);
+        holder.progressbar.setProgress((int) (appInfo.duration * 100.0 / mMax));
         mAsyncIconLoader.loadBitmap(appInfo.packageName, holder.icon);
 
         return view;
@@ -78,6 +83,7 @@ public class AppRecordListAdapter extends BaseAdapter {
         public TextView duration;
         public TextView name;
         public ImageView icon;
+        public ProgressBar progressbar;
     }
 
     private void getColorByDuration(long duration) {
