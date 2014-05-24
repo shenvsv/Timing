@@ -19,7 +19,7 @@ public class Category extends Model {
 
     @AutoIncrementPrimaryKey
     @Column("id")
-    public int id;
+    public long id;
 
     @Column("name")
     public String name;

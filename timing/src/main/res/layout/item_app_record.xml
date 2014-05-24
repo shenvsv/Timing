@@ -3,38 +3,60 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
+    android:layout_height="75dp"
+    android:background="@drawable/btn_card"
+    android:padding="10dp"
     >
 
-    <TextView
-        android:id="@+id/tv_duration"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_centerVertical="true"
-        android:textSize="16dp"
-        android:textColor="@android:color/black"
-        />
 
     <ImageView
         android:id="@+id/iv_icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/tv_duration"
         android:scaleType="centerInside"
-        android:layout_marginLeft="20dp"
         />
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+    <RelativeLayout
+        android:id="@+id/rl_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_toRightOf="@id/iv_icon"
         android:layout_marginLeft="20dp"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"
-        />
+        >
+
+        <ProgressBar
+            android:id="@+id/pb_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+            android:layout_alignParentBottom="true"
+            android:max="100"
+            android:progress="100"
+            android:secondaryProgress="33"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textSize="16dp"
+            android:textColor="@android:color/black"
+            android:layout_alignParentRight="true"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="3dp"
+            />
+    </RelativeLayout>
+
 
 </RelativeLayout>
