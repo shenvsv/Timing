@@ -4,21 +4,15 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.provider.Settings;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.smilehacker.timing.R;
 import com.smilehacker.timing.fragment.AppRecordFragment;
 import com.smilehacker.timing.fragment.CategotyMenuFragment;
 import com.smilehacker.timing.model.event.CategoryEvent;
 import com.smilehacker.timing.service.AppListenerService;
-import com.smilehacker.timing.util.AppListener;
-import com.smilehacker.timing.util.DLog;
 
 import de.greenrobot.event.EventBus;
 
@@ -72,6 +66,7 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+        
     }
 
     private void startListenerService() {

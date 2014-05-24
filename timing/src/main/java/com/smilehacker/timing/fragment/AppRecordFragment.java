@@ -8,23 +8,18 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.smilehacker.timing.R;
 import com.smilehacker.timing.adapter.AppRecordListAdapter;
 import com.smilehacker.timing.model.AppInfo;
-import com.smilehacker.timing.model.Category;
 import com.smilehacker.timing.model.DailyRecord;
 import com.smilehacker.timing.model.event.CategoryEvent;
 import com.smilehacker.timing.util.AppRecordHelper;
-import com.smilehacker.timing.util.RecordHelper;
 import com.smilehacker.timing.view.GraphView;
 import com.smilehacker.timing.view.MyListView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -61,7 +56,7 @@ public class AppRecordFragment extends Fragment {
         mLvAppRecord = (MyListView) view.findViewById(R.id.lv_app_record);
         mGraphView = (GraphView) view.findViewById(R.id.graph_pie);
         mLvAppRecord.setAdapter(mListAdapter);
-        initListView();
+
         return view;
     }
 
@@ -72,13 +67,7 @@ public class AppRecordFragment extends Fragment {
         showGraph();
     }
 
-    private void initListView() {
-//        View view = new View(getActivity());
-//        ListView.LayoutParams lp = new ListView.LayoutParams(ListView.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.graph_view_height));
-//        view.setLayoutParams(lp);
-//        view.setEnabled(false);
-//        mLvAppRecord.addHeaderView(view);
-    }
+
 
     private class NoTouchView extends View {
 
