@@ -3,9 +3,11 @@ package com.smilehacker.timing.fragment;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.smilehacker.timing.R;
@@ -13,6 +15,7 @@ import com.smilehacker.timing.adapter.AppRecordListAdapter;
 import com.smilehacker.timing.model.AppInfo;
 import com.smilehacker.timing.model.DailyRecord;
 import com.smilehacker.timing.util.AppRecordHelper;
+import com.smilehacker.timing.util.RecordHelper;
 import com.smilehacker.timing.view.GraphView;
 
 import java.util.ArrayList;
@@ -43,6 +46,7 @@ public class AppRecordFragment extends Fragment {
         mLvAppRecord = (ListView) view.findViewById(R.id.lv_app_record);
         mGraphView = (GraphView) view.findViewById(R.id.graph_pie);
         mLvAppRecord.setAdapter(mListAdapter);
+        initListView();
         return view;
     }
 
@@ -53,12 +57,23 @@ public class AppRecordFragment extends Fragment {
         showGraph();
     }
 
+    private void initListView() {
+        View view = new View(getActivity());
+        ListView.LayoutParams lp = new ListView.LayoutParams(ListView.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.graph_view_height));
+        view.setLayoutParams(lp);
+        mLvAppRecord.addHeaderView(view);
+    }
+
     private void load() {
         new AsyncTask<Void, Void, List<AppInfo>>() {
 
             @Override
             protected List<AppInfo> doInBackground(Void... voids) {
                 List<AppInfo> appInfos = mAppRecordHelper.loadAppsByDate(new Date());
+
+                RecordHelper recordHelper = new RecordHelper();
+                recordHelper.getRecordByDate(Calendar.getInstance());
+
                 return appInfos;
             }
 

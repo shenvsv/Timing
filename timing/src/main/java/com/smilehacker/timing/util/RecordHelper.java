@@ -1,6 +1,11 @@
 package com.smilehacker.timing.util;
 
 
+import android.widget.ListView;
+
+import com.smilehacker.timing.model.AppRecord;
+import com.smilehacker.timing.model.AppsCategory;
+import com.smilehacker.timing.model.Category;
 import com.smilehacker.timing.model.DailyRecord;
 import com.smilehacker.timing.model.Record;
 
@@ -8,6 +13,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import se.emilsjolander.sprinkles.CursorList;
+import se.emilsjolander.sprinkles.Query;
 
 /**
  * Created by kleist on 14-5-24.
@@ -55,4 +63,51 @@ public class RecordHelper {
         return records;
     }
 
+    public List<Record> getRecordByDate(Calendar calendar) {
+        List<Record> records = new ArrayList<Record>();
+        List<Category> categories = Category.getAllCategories();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        for (Category category : categories) {
+            CursorList<AppRecord> appRecords = Query.many(AppRecord.class,
+                    "SELECT * FROM app_record, apps_category WHERE app_record.package_name = apps_category.package_name AND apps_category.category_id = ? AND app_record.date = ?",
+                    category.id, format.format(calendar.getTime())).get();
+            long duration = 0;
+            for (AppRecord appRecord : appRecords) {
+                duration += appRecord.duration;
+            }
+            appRecords.close();
+
+            Record record = new Record();
+            record.title = category.name;
+            record.setTime(duration);
+            records.add(record);
+        }
+
+        return records;
+    }
+
+    public List<Record> getRecordByDate(Calendar start, Calendar end) {
+        List<Record> records = new ArrayList<Record>();
+        List<Category> categories = Category.getAllCategories();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        for (Category category : categories) {
+            CursorList<AppRecord> appRecords = Query.many(AppRecord.class,
+                    "SELECT * FROM app_record, apps_category WHERE app_record.package_name = apps_category.package_name AND apps_category.category_id = ? AND app_record.date >= ? AND app_record.date <= ?",
+                    category.id, format.format(start.getTime()), format.format(end.getTime())).get();
+            long duration = 0;
+            for (AppRecord appRecord : appRecords) {
+                duration += appRecord.duration;
+            }
+            appRecords.close();
+
+            Record record = new Record();
+            record.title = category.name;
+            record.setTime(duration);
+            records.add(record);
+        }
+
+        return records;
+    }
 }
