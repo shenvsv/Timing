@@ -8,6 +8,7 @@ import com.smilehacker.timing.model.AppInfo;
 import com.smilehacker.timing.model.AppRecord;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class AppRecordHelper {
         mPackageManager = context.getPackageManager();
     }
 
-    public List<AppInfo> loadAppsByDate(Date date) {
+    public List<AppInfo> loadAppsByDate(Calendar date) {
         List<AppRecord> appRecords = AppRecord.getRecordByDate(date);
         List<AppInfo> appInfos = new ArrayList<AppInfo>(appRecords.size());
 
@@ -43,6 +44,47 @@ public class AppRecordHelper {
         return appInfos;
     }
 
+    public List<AppInfo> loadAppsByDateAndCategory(Calendar date, long categoryId) {
+        List<AppRecord> appRecords = AppRecord.getRecordByDateAndCategory(date, categoryId);
+        List<AppInfo> appInfos = new ArrayList<AppInfo>(appRecords.size());
+
+        for (AppRecord appRecord: appRecords) {
+            AppInfo appInfo = new AppInfo();
+            PackageInfo packageInfo = getPkgInfoByPkgName(appRecord.packageName);
+
+            if (packageInfo == null) {
+                continue;
+            }
+
+            appInfo.appName = mPackageManager.getApplicationLabel(packageInfo.applicationInfo).toString();
+            appInfo.packageName = appRecord.packageName;
+            appInfo.setTime(appRecord.duration);
+            appInfos.add(appInfo);
+        }
+
+        return appInfos;
+    }
+
+    public List<AppInfo> loadAppsByDateWithUnsigned(Calendar date) {
+        List<AppRecord> appRecords = AppRecord.getRecordByDateWithUnsigned(date);
+        List<AppInfo> appInfos = new ArrayList<AppInfo>(appRecords.size());
+
+        for (AppRecord appRecord: appRecords) {
+            AppInfo appInfo = new AppInfo();
+            PackageInfo packageInfo = getPkgInfoByPkgName(appRecord.packageName);
+
+            if (packageInfo == null) {
+                continue;
+            }
+
+            appInfo.appName = mPackageManager.getApplicationLabel(packageInfo.applicationInfo).toString();
+            appInfo.packageName = appRecord.packageName;
+            appInfo.setTime(appRecord.duration);
+            appInfos.add(appInfo);
+        }
+
+        return appInfos;
+    }
     private PackageInfo getPkgInfoByPkgName(String pkgName) {
         PackageInfo info;
         try {
