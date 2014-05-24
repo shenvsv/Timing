@@ -8,7 +8,7 @@
     android:paddingRight="12dp"
     android:paddingTop="6dp"
     android:paddingBottom="6dp"
-    android:background="@color/holo_light_gray"
+    android:background="@color/gray_bg"
     >
 
 <RelativeLayout
@@ -62,7 +62,7 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textColor="@android:color/black"
             android:layout_marginTop="3dp"
             />

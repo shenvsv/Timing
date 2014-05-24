@@ -33,4 +33,9 @@ public class Category extends Model {
         Category category = Query.one(Category.class, "SELECT * FROM category WHERE id = ?", id).get();
         return category;
     }
+
+    public static void deleteCategoryById(long id) {
+        Category category = getCategoryById(id);
+        category.delete();
+    }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import se.emilsjolander.sprinkles.CursorList;
 import se.emilsjolander.sprinkles.Model;
+import se.emilsjolander.sprinkles.ModelList;
 import se.emilsjolander.sprinkles.Query;
 import se.emilsjolander.sprinkles.annotations.AutoIncrementPrimaryKey;
 import se.emilsjolander.sprinkles.annotations.Column;
@@ -60,5 +61,12 @@ public class AppsCategory extends Model {
             appsCategory.delete();
         }
 
+    }
+
+    public static void deleteByCategory(long categoryId) {
+        CursorList<AppsCategory> appsCategories = Query.many(AppsCategory.class,
+                "SELECT * FROM apps_category WHERE category_id = ?",
+                categoryId).get();
+        ModelList.from(appsCategories).deleteAll();
     }
 }
