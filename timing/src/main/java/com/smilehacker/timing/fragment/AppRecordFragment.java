@@ -41,7 +41,7 @@ public class AppRecordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frg_app_record, container, false);
         mLvAppRecord = (ListView) view.findViewById(R.id.lv_app_record);
-        mGraphView = (GraphView) view.findViewById(R.id.graph_bar);
+        mGraphView = (GraphView) view.findViewById(R.id.graph_pie);
         mLvAppRecord.setAdapter(mListAdapter);
         return view;
     }
