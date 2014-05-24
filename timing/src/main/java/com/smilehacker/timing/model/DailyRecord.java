@@ -59,15 +59,4 @@ public class DailyRecord extends Model {
                 date).get();
         return dailyRecords.asList();
     }
-
-    public static List<DailyRecord> getDurationByDate(Calendar start, Calendar end) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String dateStart = format.format(start.getTime());
-        String dateEnd = format.format(end.getTime());
-        CursorList<DailyRecord> dailyRecords = Query.many(DailyRecord.class,
-                "SELECT * FROM daily_record WHERE date >= ? AND date <= ?",
-                start, end).get();
-        return dailyRecords.asList();
-    }
-
 }

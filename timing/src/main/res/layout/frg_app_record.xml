@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/graph_layer"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:orientation="horizontal">
 
         <com.smilehacker.timing.view.GraphView
-            android:id="@+id/graph_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/default_margin"
+            android:id="@+id/graph_pie"
+            />
     </LinearLayout>
 
     <ListView
