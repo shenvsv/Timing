@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 
 import com.smilehacker.timing.model.AppRecord;
+import com.smilehacker.timing.model.DailyRecord;
 import com.smilehacker.timing.util.AppListener;
 import com.smilehacker.timing.util.DLog;
 
@@ -79,6 +80,7 @@ public class AppListenerService extends Service {
             protected Void doInBackground(Void... voids) {
                 String packageName = mAppListener.getForegroundPackage();
                 AppRecord.increaseData(packageName);
+                DailyRecord.addRecordByNow();
                 return null;
             }
         }.execute();

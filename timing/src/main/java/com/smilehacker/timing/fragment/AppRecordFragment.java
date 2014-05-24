@@ -11,9 +11,11 @@ import android.widget.ListView;
 import com.smilehacker.timing.R;
 import com.smilehacker.timing.adapter.AppRecordListAdapter;
 import com.smilehacker.timing.model.AppInfo;
+import com.smilehacker.timing.model.DailyRecord;
 import com.smilehacker.timing.util.AppRecordHelper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -62,5 +64,9 @@ public class AppRecordFragment extends Fragment {
                 mListAdapter.flush(appInfos);
             }
         }.execute();
+    }
+
+    private List<DailyRecord> loadDailyRecord(Calendar calendar) {
+        return DailyRecord.getDurationByDate(calendar);
     }
 }

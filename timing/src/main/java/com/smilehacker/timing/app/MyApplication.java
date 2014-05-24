@@ -5,6 +5,7 @@ import android.app.Application;
 import com.smilehacker.timing.model.AppRecord;
 import com.smilehacker.timing.model.AppsCategory;
 import com.smilehacker.timing.model.Category;
+import com.smilehacker.timing.model.DailyRecord;
 
 import se.emilsjolander.sprinkles.Migration;
 import se.emilsjolander.sprinkles.Sprinkles;
@@ -26,6 +27,7 @@ public class MyApplication extends Application {
         migration.createTable(AppRecord.class);
         migration.createTable(Category.class);
         migration.createTable(AppsCategory.class);
+        migration.createTable(DailyRecord.class);
         sprinkles.addMigration(migration);
     }
 }
