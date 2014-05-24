@@ -2,13 +2,17 @@ package com.smilehacker.timing.view;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.util.AttributeSet;
 
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
 import com.smilehacker.timing.R;
-import com.smilehacker.timing.model.DailyRecord;
+import com.smilehacker.timing.model.Record;
+import com.smilehacker.timing.util.DLog;
+import com.smilehacker.timing.util.RecordHelper;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -19,48 +23,42 @@ public class GraphView extends PieGraph {
 
     public GraphView(Context context) {
         super(context);
-        onStart();
+//        onStart();
     }
 
     public GraphView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        onStart();
+//        onStart();
     }
 
     public GraphView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        onStart();
+//        onStart();
     }
-
-    private void onStart(){
+    public void show(){
+        final RecordHelper helper = new RecordHelper();
         final Resources resources = getResources();
-        PieSlice slice = new PieSlice();
-        slice.setColor(resources.getColor(R.color.green_light));
-        slice.setSelectedColor(resources.getColor(R.color.transparent_orange));
-        slice.setValue(2);
-        this.addSlice(slice);
-        slice = new PieSlice();
-        slice.setColor(resources.getColor(R.color.orange));
-        slice.setValue(3);
-        this.addSlice(slice);
-        slice = new PieSlice();
-        slice.setColor(resources.getColor(R.color.purple));
-        slice.setValue(8);
-        this.addSlice(slice);
-        this.setInnerCircleRatio(150);
-        this.setPadding(2);
-        this.setOnSliceClickedListener(new OnSliceClickedListener() {
+        new AsyncTask<Void, Void, List<Record>>(){
 
             @Override
-            public void onClick(int index) {
-               System.out.println("/"+index);
+            protected List<Record> doInBackground(Void... voids) {
+                return helper.getRecordByDate(Calendar.getInstance());
             }
-        });
-    }
-    public void show(List<DailyRecord> dailyRecords){
-//        LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) this.getLayoutParams();
-//        linearParams.weight = this.getHeight()/3;
-//        this.setLayoutParams(linearParams);
-//       onStart();
+            @Override
+            protected void onPostExecute(List<Record> infos) {
+                super.onPostExecute(infos);
+                DLog.i("//"+infos.size());
+                for (int i = 0; i < infos.size(); i++ ){
+                    Record info = infos.get(i);
+                    PieSlice slice = new PieSlice();
+                    slice.setColor(resources.getColor(R.color.green_light));
+                    slice.setSelectedColor(resources.getColor(R.color.transparent_blue));
+                    slice.setValue(info.second);
+                    GraphView.this.addSlice(slice);
+                }
+                GraphView.this.setInnerCircleRatio(150);
+                GraphView.this.setPadding(2);
+            }
+        }.execute();
     }
 }

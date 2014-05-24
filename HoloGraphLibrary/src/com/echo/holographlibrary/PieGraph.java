@@ -122,11 +122,17 @@ public class PieGraph extends View {
 
             count++;
         }
-//        mPaint.setTextSize(150);
-//        mPaint.setTextAlign(Paint.Align.CENTER);
-//        canvas.drawText("36%", midX, midY, mPaint);
+        mPaint.setColor(Color.BLACK);
+        mPaint.setTextSize(150);
+        mPaint.setTextAlign(Paint.Align.CENTER);
+        Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
+
+        float fontHeight = fontMetrics.bottom - fontMetrics.top;
+        float textBaseY = getHeight() - (getHeight() - fontHeight) / 2 - fontMetrics.bottom;
+        canvas.drawText("36%", getWidth() / 2, textBaseY, mPaint);
         mDrawCompleted = true;
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

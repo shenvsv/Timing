@@ -34,7 +34,6 @@ public class AppRecordFragment extends Fragment {
     private AppRecordListAdapter mListAdapter;
     private GraphView mGraphView;
     private EventBus mEventBus;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +63,7 @@ public class AppRecordFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         load();
-        showGraph();
+        mGraphView.show();
     }
 
 
@@ -108,23 +107,6 @@ public class AppRecordFragment extends Fragment {
             protected void onPostExecute(List<AppInfo> appInfos) {
                 super.onPostExecute(appInfos);
                 mListAdapter.flush(appInfos);
-            }
-        }.execute();
-    }
-
-
-    private void showGraph(){
-        new AsyncTask<Void, Void, List<DailyRecord>>(){
-
-            @Override
-            protected List<DailyRecord> doInBackground(Void... voids) {
-                return loadDailyRecord(Calendar.getInstance());
-            }
-
-            @Override
-            protected void onPostExecute(List<DailyRecord> dailyRecords) {
-                super.onPostExecute(dailyRecords);
-                mGraphView.show(dailyRecords);
             }
         }.execute();
     }

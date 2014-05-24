@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.smilehacker.timing.R;
@@ -13,6 +14,7 @@ import com.smilehacker.timing.fragment.AppRecordFragment;
 import com.smilehacker.timing.fragment.CategotyMenuFragment;
 import com.smilehacker.timing.model.event.CategoryEvent;
 import com.smilehacker.timing.service.AppListenerService;
+import com.smilehacker.timing.util.DateHelper;
 
 import de.greenrobot.event.EventBus;
 
@@ -52,8 +54,11 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.select_app, menu);
         return true;
+
     }
 
     @Override
@@ -63,6 +68,10 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.action_time){
+            DateHelper.getDate(MainActivity.this);
             return true;
         }
         return super.onOptionsItemSelected(item);
