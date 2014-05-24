@@ -20,50 +20,43 @@ public class GraphView extends BarGraph {
 
     public GraphView(Context context) {
         super(context);
-        onStart();
+        //onStart();
     }
 
     public GraphView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        onStart();
+        //onStart();
     }
 
     public GraphView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        onStart();
+        //onStart();
     }
 
     private void onStart(){
         final Resources resources = getResources();
         ArrayList<Bar> aBars = new ArrayList<Bar>();
-        for (int i = 0; i < 24 ; i++){
+        for (int i = 0; i < 12 ; i++){
             Bar bar = new Bar();
             bar.setColor(resources.getColor(R.color.green_light));
             bar.setSelectedColor(resources.getColor(R.color.transparent_orange));
             bar.setName("Test1");
-            bar.setValue(1000);
-            bar.setValueString("1,000");
+            double a = Math.random() * 1000;
+            bar.setValue((int)a);
+            //bar.setValueString("1000");
             aBars.add(bar);
         }
 
         this.setBars(aBars);
-        this.setAxisColor(R.color.transparent_blue);
-        this.setShowBarText(true);
-        this.setShowAxis(true);
-
-        this.setOnBarClickedListener(new OnBarClickedListener() {
-
-            @Override
-            public void onClick(int index) {
-
-            }
-        });
+        //this.setAxisColor(R.color.transparent_blue);
+        // this.setShowBarText(true);
+        // this.setShowAxis(true);
 
     }
     public void show(List<DailyRecord> dailyRecords){
 //        LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) this.getLayoutParams();
 //        linearParams.weight = this.getHeight()/3;
 //        this.setLayoutParams(linearParams);
-       // onStart();
+       onStart();
     }
 }
