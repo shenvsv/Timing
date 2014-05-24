@@ -2,4 +2,12 @@
 <resources>
     <color name="holo_light_gray">#FFDDDDDD</color>
     <color name="light_gray_background">#33C0C0C0</color>
+    <color name="red">#FFFF0000</color>
+    <color name="blue">#FF0000FF</color>
+    <color name="transparent_blue">#800000FF</color>
+    <color name="green">#FF00FF00</color>
+    <color name="green_light">#FF99CC00</color>
+    <color name="orange">#FFFFBB33</color>
+    <color name="transparent_orange">#80FFBB33</color>
+    <color name="purple">#FFAA66CC</color>
 </resources>

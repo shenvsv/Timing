@@ -1,1 +1,1 @@
-include ':timing'
+include ':timing', ':HoloGraphLibrary'

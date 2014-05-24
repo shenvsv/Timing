@@ -13,6 +13,7 @@ import com.smilehacker.timing.adapter.AppRecordListAdapter;
 import com.smilehacker.timing.model.AppInfo;
 import com.smilehacker.timing.model.DailyRecord;
 import com.smilehacker.timing.util.AppRecordHelper;
+import com.smilehacker.timing.view.GraphView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +28,7 @@ public class AppRecordFragment extends Fragment {
     private ListView mLvAppRecord;
     private AppRecordHelper mAppRecordHelper;
     private AppRecordListAdapter mListAdapter;
+    private GraphView mGraphView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class AppRecordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frg_app_record, container, false);
         mLvAppRecord = (ListView) view.findViewById(R.id.lv_app_record);
+        mGraphView = (GraphView) view.findViewById(R.id.graph_bar);
         mLvAppRecord.setAdapter(mListAdapter);
         return view;
     }
@@ -47,6 +50,7 @@ public class AppRecordFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         load();
+        showGraph();
     }
 
     private void load() {
@@ -62,6 +66,22 @@ public class AppRecordFragment extends Fragment {
             protected void onPostExecute(List<AppInfo> appInfos) {
                 super.onPostExecute(appInfos);
                 mListAdapter.flush(appInfos);
+            }
+        }.execute();
+    }
+
+    private void showGraph(){
+        new AsyncTask<Void, Void, List<DailyRecord>>(){
+
+            @Override
+            protected List<DailyRecord> doInBackground(Void... voids) {
+                return loadDailyRecord(Calendar.getInstance());
+            }
+
+            @Override
+            protected void onPostExecute(List<DailyRecord> dailyRecords) {
+                super.onPostExecute(dailyRecords);
+                mGraphView.show(dailyRecords);
             }
         }.execute();
     }
