@@ -38,10 +38,12 @@
         <ProgressBar
             android:id="@+id/pb_time"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+            android:layout_height="5dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_alignParentBottom="true"
             android:max="100"
+            android:background="@drawable/bg_pb_time"
+            android:progressDrawable="@drawable/time_progressbar"
             />
 
 

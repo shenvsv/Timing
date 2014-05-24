@@ -28,4 +28,9 @@ public class Category extends Model {
         CursorList<Category> categories = Query.all(Category.class).get();
         return categories.asList();
     }
+
+    public static Category getCategoryById(long id) {
+        Category category = Query.one(Category.class, "SELECT * FROM category WHERE id = ?", id).get();
+        return category;
+    }
 }
