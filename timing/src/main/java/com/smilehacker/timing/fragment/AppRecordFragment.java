@@ -14,6 +14,7 @@ import com.smilehacker.timing.adapter.AppRecordListAdapter;
 import com.smilehacker.timing.model.AppInfo;
 import com.smilehacker.timing.model.DailyRecord;
 import com.smilehacker.timing.model.event.CategoryEvent;
+import com.smilehacker.timing.model.event.DataChangeEvent;
 import com.smilehacker.timing.util.AppRecordHelper;
 import com.smilehacker.timing.view.GraphView;
 import com.smilehacker.timing.view.MyListView;
@@ -117,5 +118,12 @@ public class AppRecordFragment extends Fragment {
 
     public void onEvent(CategoryEvent event) {
         load(event.id);
+    }
+
+
+    public void onEvent(DataChangeEvent event) {
+        if (event.action == DataChangeEvent.ACTION_CATEGORY_DELETED) {
+            load();
+        }
     }
 }

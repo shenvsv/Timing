@@ -12,4 +12,10 @@
     <color name="purple">#FFAA66CC</color>
 
     <color name="main_blue">#3bbef9</color>
+    <color name="menu_bg">#99232323</color>
+    <color name="gray_font">#c6c6c6</color>
+    <color name="gray_bg">#F5F5F5</color>
+
+    <color name="action_blue">#68b5e4</color>
+    <color name="deep_blue">#5798cc</color>
 </resources>

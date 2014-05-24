@@ -26,8 +26,14 @@ public class AppInfo {
         long hour = second / 3600;
         second %= 3600;
         long mintue = second / 60;
-        second %= 60;
 
-        return String.format("%1$d:%2$02d:%3$02d", hour, mintue, second);
+        if (hour == 0) {
+            if (mintue < 1) {
+                mintue = 1;
+            }
+            return String.format("%1$dmin", mintue);
+        } else {
+            return String.format("%1$dh %2$2dmin", hour, mintue);
+        }
     }
 }

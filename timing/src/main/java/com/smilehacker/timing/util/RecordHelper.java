@@ -110,4 +110,25 @@ public class RecordHelper {
 
         return records;
     }
+
+    public Record getRecordByDateAndCategory(Calendar calendar, long categoryId) {
+    Category category = Category.getCategoryById(categoryId);
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        CursorList<AppRecord> appRecords = Query.many(AppRecord.class,
+                "SELECT * FROM app_record, apps_category WHERE app_record.package_name = apps_category.package_name AND apps_category.category_id = ? AND app_record.date = ?",
+                categoryId, format.format(calendar.getTime())).get();
+        long duration = 0;
+        for (AppRecord appRecord : appRecords) {
+            duration += appRecord.duration;
+        }
+        appRecords.close();
+
+        Record record = new Record();
+        record.title = category.name;
+        record.setTime(duration);
+
+        return record;
+    }
+
 }
