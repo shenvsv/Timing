@@ -3,10 +3,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <HorizontalScrollView
+        android:id = "@+id/graph_layer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scrollbarStyle="insideOverlay">
+        <LinearLayout
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <com.smilehacker.timing.view.GraphView
+                android:layout_width="1000dp"
+                android:layout_height="match_parent"
+                android:id = "@+id/graph_bar"
+            />
+        </LinearLayout>
+    </HorizontalScrollView>
     <ListView
         android:id="@+id/lv_app_record"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/graph_layer"
         >
     </ListView>
 

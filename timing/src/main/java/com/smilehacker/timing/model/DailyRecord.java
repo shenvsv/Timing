@@ -1,17 +1,15 @@
 package com.smilehacker.timing.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+
 import se.emilsjolander.sprinkles.CursorList;
 import se.emilsjolander.sprinkles.Model;
 import se.emilsjolander.sprinkles.Query;
 import se.emilsjolander.sprinkles.annotations.AutoIncrementPrimaryKey;
 import se.emilsjolander.sprinkles.annotations.Column;
 import se.emilsjolander.sprinkles.annotations.Table;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by kleist on 14-5-24.
@@ -35,7 +33,7 @@ public class DailyRecord extends Model {
     public static void addRecordByNow() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String date = format.format(calendar);
+        String date = format.format(calendar.getTime());
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
         DailyRecord dailyRecord = Query.one(DailyRecord.class,
@@ -55,7 +53,7 @@ public class DailyRecord extends Model {
 
     public static List<DailyRecord> getDurationByDate(Calendar calendar) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String date = format.format(calendar);
+        String date = format.format(calendar.getTime());
         CursorList<DailyRecord> dailyRecords = Query.many(DailyRecord.class,
                 "SELECT * FROM daily_record WHERE date = ?",
                 date).get();
