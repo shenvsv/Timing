@@ -42,11 +42,9 @@ public class AppRecord extends Model {
                 "SELECT * FROM app_record WHERE package_name = ? AND date = ?",
                 packageName, today).get();
         if (appRecord != null) {
-            DLog.i("update record " + packageName);
             appRecord.duration += Constants.TRICK_INTERVAL_SECOND;
             appRecord.save();
         } else {
-            DLog.i("new record " + packageName);
             appRecord = new AppRecord();
             appRecord.packageName = packageName;
             appRecord.date = today;
@@ -71,7 +69,7 @@ public class AppRecord extends Model {
 
     public static List<AppRecord> getRecordByDate(Date begin, Date end) {
         CursorList<AppRecord> appRecords = Query.many(AppRecord.class,
-                "SELECT * FROM app_record WHERE date >= ? AND date <= ? ORDER BY duration",
+                "SELECT * FROM app_record WHERE date >= ? AND date <= ? ORDER BY duration DESC",
                 formatDate(begin), formatDate(end))
                 .get();
         List<AppRecord> list = appRecords.asList();
@@ -81,7 +79,7 @@ public class AppRecord extends Model {
 
     public static List<AppRecord> getRecordByDate(Date date) {
         CursorList<AppRecord> appRecords = Query.many(AppRecord.class,
-                "SELECT * FROM app_record WHERE date = ? ORDER BY duration",
+                "SELECT * FROM app_record WHERE date = ? ORDER BY duration DESC",
                 formatDate(date))
                 .get();
         List<AppRecord> list = appRecords.asList();

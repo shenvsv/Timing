@@ -78,7 +78,6 @@ public class AppListenerService extends Service {
             @Override
             protected Void doInBackground(Void... voids) {
                 String packageName = mAppListener.getForegroundPackage();
-                DLog.i("package = " + packageName);
                 AppRecord.increaseData(packageName);
                 return null;
             }
