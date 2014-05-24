@@ -122,9 +122,9 @@ public class PieGraph extends View {
 
             count++;
         }
-        mPaint.setTextSize(150);
-        mPaint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText("36%", midX, midY, mPaint);
+//        mPaint.setTextSize(150);
+//        mPaint.setTextAlign(Paint.Align.CENTER);
+//        canvas.drawText("36%", midX, midY, mPaint);
         mDrawCompleted = true;
     }
 

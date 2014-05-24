@@ -49,6 +49,13 @@ public class GraphView extends PieGraph {
         this.addSlice(slice);
         this.setInnerCircleRatio(150);
         this.setPadding(2);
+        this.setOnSliceClickedListener(new OnSliceClickedListener() {
+
+            @Override
+            public void onClick(int index) {
+               System.out.println("/"+index);
+            }
+        });
     }
     public void show(List<DailyRecord> dailyRecords){
 //        LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) this.getLayoutParams();
