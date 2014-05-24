@@ -15,6 +15,7 @@ import com.smilehacker.timing.adapter.AppRecordListAdapter;
 import com.smilehacker.timing.model.AppInfo;
 import com.smilehacker.timing.model.DailyRecord;
 import com.smilehacker.timing.util.AppRecordHelper;
+import com.smilehacker.timing.util.DateHelper;
 import com.smilehacker.timing.util.RecordHelper;
 import com.smilehacker.timing.view.GraphView;
 
@@ -63,6 +64,7 @@ public class AppRecordFragment extends Fragment {
         view.setLayoutParams(lp);
         view.setEnabled(false);
         mLvAppRecord.addHeaderView(view);
+        new DateHelper().getDate(getActivity());
     }
 
     private class NoTouchView extends View {
