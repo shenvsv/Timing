@@ -70,8 +70,7 @@ public class CategoryListAdapter extends BaseAdapter {
             @Override
             public boolean onLongClick(View view) {
                 Intent intent = new Intent(mContext, SelectAppActivity.class);
-                DLog.i("long click id = " + category.id);
-                intent.putExtra(SelectAppActivity.KEY_CATEGORY_ID, category.id);
+                intent.putExtra(SelectAppActivity.KEY_CATEGORY_ID, (int) category.id);
                 mContext.startActivity(intent);
                 return true;
             }

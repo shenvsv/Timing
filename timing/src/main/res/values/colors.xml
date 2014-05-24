@@ -10,4 +10,6 @@
     <color name="orange">#FFFFBB33</color>
     <color name="transparent_orange">#80FFBB33</color>
     <color name="purple">#FFAA66CC</color>
+
+    <color name="main_blue">#3bbef9</color>
 </resources>
