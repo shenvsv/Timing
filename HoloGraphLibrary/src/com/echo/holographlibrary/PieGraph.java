@@ -75,7 +75,7 @@ public class PieGraph extends View {
         float currentAngle = 270;
         float currentSweep = 0;
         int totalValue = 0;
-
+        //获取圆心坐标x,y
         midX = getWidth() / 2;
         midY = getHeight() / 2;
         if (midX < midY) {
@@ -122,6 +122,9 @@ public class PieGraph extends View {
 
             count++;
         }
+//        mPaint.setTextSize(150);
+//        mPaint.setTextAlign(Paint.Align.CENTER);
+//        canvas.drawText("36%", midX, midY, mPaint);
         mDrawCompleted = true;
     }
 

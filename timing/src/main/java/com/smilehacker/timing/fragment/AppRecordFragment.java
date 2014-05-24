@@ -1,13 +1,13 @@
 package com.smilehacker.timing.fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.smilehacker.timing.R;
@@ -75,7 +75,23 @@ public class AppRecordFragment extends Fragment {
         View view = new View(getActivity());
         ListView.LayoutParams lp = new ListView.LayoutParams(ListView.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.graph_view_height));
         view.setLayoutParams(lp);
+        view.setEnabled(false);
         mLvAppRecord.addHeaderView(view);
+    }
+
+    private class NoTouchView extends View {
+
+        public NoTouchView(Context context) {
+            super(context);
+        }
+
+        @Override
+        public boolean onTouchEvent(MotionEvent event) {
+            return false;
+        }
+
+
+
     }
 
     private void load() {
