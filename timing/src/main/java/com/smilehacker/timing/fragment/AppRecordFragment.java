@@ -19,6 +19,7 @@ import com.smilehacker.timing.model.event.CategoryEvent;
 import com.smilehacker.timing.util.AppRecordHelper;
 import com.smilehacker.timing.util.RecordHelper;
 import com.smilehacker.timing.view.GraphView;
+import com.smilehacker.timing.view.MyListView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,7 +34,7 @@ import de.greenrobot.event.EventBus;
  */
 public class AppRecordFragment extends Fragment {
 
-    private ListView mLvAppRecord;
+    private MyListView mLvAppRecord;
     private AppRecordHelper mAppRecordHelper;
     private AppRecordListAdapter mListAdapter;
     private GraphView mGraphView;
@@ -57,7 +58,7 @@ public class AppRecordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frg_app_record, container, false);
-        mLvAppRecord = (ListView) view.findViewById(R.id.lv_app_record);
+        mLvAppRecord = (MyListView) view.findViewById(R.id.lv_app_record);
         mGraphView = (GraphView) view.findViewById(R.id.graph_pie);
         mLvAppRecord.setAdapter(mListAdapter);
         initListView();
@@ -72,11 +73,11 @@ public class AppRecordFragment extends Fragment {
     }
 
     private void initListView() {
-        View view = new View(getActivity());
-        ListView.LayoutParams lp = new ListView.LayoutParams(ListView.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.graph_view_height));
-        view.setLayoutParams(lp);
-        view.setEnabled(false);
-        mLvAppRecord.addHeaderView(view);
+//        View view = new View(getActivity());
+//        ListView.LayoutParams lp = new ListView.LayoutParams(ListView.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.graph_view_height));
+//        view.setLayoutParams(lp);
+//        view.setEnabled(false);
+//        mLvAppRecord.addHeaderView(view);
     }
 
     private class NoTouchView extends View {
