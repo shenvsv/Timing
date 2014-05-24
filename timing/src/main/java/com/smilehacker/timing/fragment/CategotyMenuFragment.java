@@ -21,9 +21,12 @@ import com.smilehacker.timing.R;
 import com.smilehacker.timing.activity.SelectAppActivity;
 import com.smilehacker.timing.adapter.CategoryListAdapter;
 import com.smilehacker.timing.model.Category;
+import com.smilehacker.timing.model.event.CategoryEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by kleist on 14-5-24.
@@ -32,12 +35,16 @@ public class CategotyMenuFragment extends Fragment {
 
     private ListView mLvCategory;
     private Button mBtnAdd;
+    private Button mBtnAll;
+    private Button mBtnUnsigned;
     private CategoryListAdapter mCategoryListAdapter;
+    private EventBus mEventBus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCategoryListAdapter = new CategoryListAdapter(getActivity(), new ArrayList<Category>());
+        mEventBus = EventBus.getDefault();
     }
 
     @Override
@@ -45,6 +52,8 @@ public class CategotyMenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.frg_menu_category, container, false);
         mLvCategory = (ListView) view.findViewById(R.id.lv_category);
         mBtnAdd = (Button) view.findViewById(R.id.btn_add_category);
+        mBtnAll = (Button) view.findViewById(R.id.btn_all);
+        mBtnUnsigned = (Button) view.findViewById(R.id.btn_unassigned);
 
         mLvCategory.setAdapter(mCategoryListAdapter);
         initView();
@@ -83,6 +92,24 @@ public class CategotyMenuFragment extends Fragment {
             }
         });
 
+        mBtnAll.setOnClickListener(new OnCategoryClickListener(CategoryEvent.ID_ALL));
+        mBtnUnsigned.setOnClickListener(new OnCategoryClickListener(CategoryEvent.ID_UNSIGNED));
+    }
+
+    public class OnCategoryClickListener implements View.OnClickListener {
+
+        private int categoryId;
+
+        public OnCategoryClickListener(int categoryId) {
+            this.categoryId = categoryId;
+        }
+
+        @Override
+        public void onClick(View view) {
+            CategoryEvent event = new CategoryEvent();
+            event.id = categoryId;
+            mEventBus.post(event);
+        }
     }
 
     private void load() {

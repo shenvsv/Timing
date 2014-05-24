@@ -4,30 +4,32 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.provider.Settings;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.smilehacker.timing.R;
 import com.smilehacker.timing.fragment.AppRecordFragment;
 import com.smilehacker.timing.fragment.CategotyMenuFragment;
+import com.smilehacker.timing.model.event.CategoryEvent;
 import com.smilehacker.timing.service.AppListenerService;
-import com.smilehacker.timing.util.AppListener;
-import com.smilehacker.timing.util.DLog;
+
+import de.greenrobot.event.EventBus;
 
 
 public class MainActivity extends Activity {
 
-
+    private DrawerLayout mDrawerLayout;
+    private EventBus mEventBus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mEventBus = EventBus.getDefault();
+        mEventBus.register(this);
 
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.dl_container);
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
@@ -37,8 +39,15 @@ public class MainActivity extends Activity {
         startListenerService();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mEventBus.unregister(this);
+    }
 
-
+    public void onEvent(CategoryEvent event) {
+        mDrawerLayout.closeDrawers();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
