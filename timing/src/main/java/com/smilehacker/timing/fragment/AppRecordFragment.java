@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.smilehacker.timing.R;
 import com.smilehacker.timing.adapter.AppRecordListAdapter;
@@ -35,6 +36,7 @@ public class AppRecordFragment extends Fragment {
     private AppRecordListAdapter mListAdapter;
     private GraphView mGraphView;
     private EventBus mEventBus;
+    private LinearLayout mGraphLayer;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +57,8 @@ public class AppRecordFragment extends Fragment {
         View view = inflater.inflate(R.layout.frg_app_record, container, false);
         mLvAppRecord = (MyListView) view.findViewById(R.id.lv_app_record);
         mGraphView = (GraphView) view.findViewById(R.id.graph_pie);
+        mGraphLayer = (LinearLayout) view.findViewById(R.id.graph_layer);
         mLvAppRecord.setAdapter(mListAdapter);
-
         return view;
     }
 
@@ -80,8 +82,6 @@ public class AppRecordFragment extends Fragment {
             return false;
         }
 
-
-
     }
 
     private void load() {
@@ -89,7 +89,7 @@ public class AppRecordFragment extends Fragment {
     }
 
     private void load(final long id) {
-        new AsyncTask<Void, Void, List<AppInfo>>() {
+       new AsyncTask<Void, Void, List<AppInfo>>() {
 
             @Override
             protected List<AppInfo> doInBackground(Void... voids) {
@@ -118,12 +118,19 @@ public class AppRecordFragment extends Fragment {
 
     public void onEvent(CategoryEvent event) {
         load(event.id);
+        if (event.id == CategoryEvent.ID_ALL){
+            mGraphView.show();
+        } else {
+            mGraphView.show(event.id);
+        }
+
     }
 
 
     public void onEvent(DataChangeEvent event) {
         if (event.action == DataChangeEvent.ACTION_CATEGORY_DELETED) {
             load();
+            mGraphView.show();
         }
     }
 }

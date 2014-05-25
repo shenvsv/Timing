@@ -2,13 +2,19 @@
 <resources>
     <color name="holo_light_gray">#FFDDDDDD</color>
     <color name="light_gray_background">#33C0C0C0</color>
-    <color name="red">#FFFF0000</color>
-    <color name="blue">#FF0000FF</color>
-    <color name="transparent_blue">#800000FF</color>
-    <color name="green">#FF00FF00</color>
-    <color name="green_light">#FF99CC00</color>
-    <color name="orange">#FFFFBB33</color>
-    <color name="transparent_orange">#80FFBB33</color>
+
+    <color name="red">#e5536b</color>
+    <color name="light_red">#ef98a6</color>
+
+    <color name="blue">#72aec3</color>
+    <color name="light_blue">#9ac5d4</color>
+
+    <color name="green">#c9ddaa</color>
+    <color name="light_green">#d9e7c2</color>
+
+    <color name="orange">#eca371</color>
+    <color name="light_orange">#f4c8aa</color>
+
     <color name="purple">#FFAA66CC</color>
 
     <color name="main_blue">#3bbef9</color>

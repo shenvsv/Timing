@@ -48,6 +48,9 @@ public class PieGraph extends View {
     private OnSliceClickedListener mListener;
     private boolean mDrawCompleted = false;
     private RectF mRectF = new RectF();
+    private String cString = "";
+    private Boolean isShwoTouch = false;
+    public String rate = "";
 
     public PieGraph(Context context) {
         this(context, null);
@@ -123,13 +126,13 @@ public class PieGraph extends View {
             count++;
         }
         mPaint.setColor(Color.BLACK);
-        mPaint.setTextSize(150);
+        mPaint.setTextSize(450/cString.length());
         mPaint.setTextAlign(Paint.Align.CENTER);
         Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
 
         float fontHeight = fontMetrics.bottom - fontMetrics.top;
         float textBaseY = getHeight() - (getHeight() - fontHeight) / 2 - fontMetrics.bottom;
-        canvas.drawText("36%", getWidth() / 2, textBaseY, mPaint);
+        canvas.drawText(cString, getWidth() / 2, textBaseY, mPaint);
         mDrawCompleted = true;
     }
 
@@ -152,6 +155,8 @@ public class PieGraph extends View {
                         if (r.contains(point.x, point.y)) {
                             mSelectedIndex = count;
                             postInvalidate();
+                            isShwoTouch = true;
+                            setText(slice.getTitle());
                         }
                         break;
                     case MotionEvent.ACTION_UP:
@@ -159,6 +164,7 @@ public class PieGraph extends View {
                                 && mListener != null
                                 && r.contains(point.x, point.y)) {
                             mListener.onClick(mSelectedIndex);
+
                         }
                         break;
                 }
@@ -169,9 +175,18 @@ public class PieGraph extends View {
         if (MotionEvent.ACTION_UP == event.getAction()
                 || MotionEvent.ACTION_CANCEL == event.getAction()) {
             mSelectedIndex = -1;
+            cString = rate;
+            isShwoTouch = false;
             postInvalidate();
+
+
         }
         return true;
+    }
+
+    public void setText(String cString){
+        this.cString = cString;
+        postInvalidate();
     }
 
     public void setPadding(int padding) {
